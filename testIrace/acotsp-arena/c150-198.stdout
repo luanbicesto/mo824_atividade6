@@ -1,0 +1,63 @@
+
+ACO algorithms for the TSP, v1.03
+	 OPTIONS:
+	Note: time limit is set to default 10 seconds
+  -r  --tries with argument "1"
+	Note: maximum number tours is set to default 0
+      --seed with argument "196891916"
+	Note: optimal solution value is set to default 1
+  -i  --tsplibfile with argument "/home/luanb/Luan/Unicamp/11_Semestre/MO824/trabalho/atividade6/testIrace/Instances//2000-938.tsp"
+mmas_flag is set to 1, run MAX-MIN Ant System
+  -l  --localsearch with argument "2"
+  -m  --ants with argument "56"
+	Note: number of nearest neighbours in tour construction is set to default 20
+  -a  --alpha with argument "0.190000"
+  -b  --beta with argument "0.720000"
+  -e  --rho with argument "0.680000"
+	Note: q_0 is set to default 0
+	Note: number of elitist ants is set to default n
+	Note: number of ranks is set to default 0
+  -k  --nnls with argument "28"
+  -d  --dlb with argument "0"
+Non-option arguments:
+
+reading tsp-file /home/luanb/Luan/Unicamp/11_Semestre/MO824/trabalho/atividade6/testIrace/Instances//2000-938.tsp ... 
+
+calculating distance matrix ..
+
+ .. done
+
+Parameter-settings: 
+
+max_tries		 1
+max_tours		 0
+max_time		 10.00
+seed		 196891916
+optimum			 1
+n_ants			 56
+nn_ants			 20
+alpha			 0.19
+beta			 0.72
+rho			 0.68
+q_0			 0.00
+elitist_ants		 0
+ras_ranks		 0
+ls_flag			 2
+nn_ls			 28
+dlb_flag		 0
+as_flag			 0
+eas_flag		 0
+ras_flag		 0
+mmas_flag		 1
+bwas_flag		 0
+acs_flag		 0
+
+allocate ants' memory ..
+
+ .. done
+Initialization took 0.4342630000 seconds
+best 34212489, iteration: 1, time 0.51
+best 34144925, iteration: 2, time 0.69
+best 34134176, iteration: 3, time 0.89
+best 34032248, iteration: 6, time 1.48
+best 33986752, iteration: 22, time 4.64
