@@ -1,0 +1,3 @@
+### Parameter file for the ACOTSP software
+# name		switch		     type	values			[conditions (using R syntax)]
+alpha   "--alpha "   r   (0.01, 1.00)

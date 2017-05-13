@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import grasp.metaheuristics.grasp.AbstractGRASP;
 import grasp.problems.qbf.QBF_Inverse;
 import grasp.solutions.Solution;
+import tabusearchheuristic.problems.qbf.solvers.TabuSearchParameters;
 
 
 
@@ -165,13 +166,22 @@ public class GRASP_QBF extends AbstractGRASP<Integer> {
 	public static void main(String[] args) throws IOException {
 
 		long startTime = System.currentTimeMillis();
-		GRASP_QBF grasp = new GRASP_QBF(0.05, 1000, "instances/qbf020");
+		GraspParameters parameters = buildParameters(args);
+		
+		GRASP_QBF grasp = new GRASP_QBF(parameters.getAlpha(), 1000, parameters.getInstanceName());
 		Solution<Integer> bestSol = grasp.solve();
-		System.out.println("maxVal = " + bestSol);
+		System.out.println("Best " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
-		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+		//System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
 
 	}
-
+	
+	private static GraspParameters buildParameters(String[] args) {
+	    GraspParameters parameters = new GraspParameters();
+	    parameters.setInstanceName(args[1]);
+	    parameters.setAlpha(Double.parseDouble(args[5]));
+	    
+	    return parameters;
+	}
 }
