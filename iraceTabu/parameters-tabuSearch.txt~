@@ -1,0 +1,6 @@
+### Parameter file for the ACOTSP software
+# name		switch		     type	values			[conditions (using R syntax)]
+tenure                              "--tenure "                                     i   (10, 50)
+interationsToStartIntensification   "--interationsToStartIntensification "   i   (700, 1300)
+interationsOfIntensification        "--interationsOfIntensification "        i   (300, 600)
+percentageFixeditems                "--percentageFixeditems "                i   (5, 35)

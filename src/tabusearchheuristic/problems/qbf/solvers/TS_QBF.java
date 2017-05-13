@@ -31,11 +31,12 @@ public class TS_QBF extends AbstractTS<Integer> {
 	
 	private final Integer fake = new Integer(-1);
 	
-	private static final int INTERATIONS_TO_START_INTENSIFICATION = 800;
+	//private static final int INTERATIONS_TO_START_INTENSIFICATION = 800;
 	
-	private static final int INTERATIONS_OF_INTENSIFICATION = 400;
+	//private static final int INTERATIONS_OF_INTENSIFICATION = 400;
 	
-	private static final int PERCENTAGE_FIXED_ITENS = 20;
+	//private static final int PERCENTAGE_FIXED_ITENS = 20;
+	private int percentageFixedItems;
 	
 	private enum OperationNeighborhood {INSERT, REMOVE, EXCHANGE};
 	
@@ -63,13 +64,15 @@ public class TS_QBF extends AbstractTS<Integer> {
 	 * @throws IOException
 	 *             necessary for I/O operations.
 	 */
-	public TS_QBF(Integer tenure, Integer iterations, String filename) throws IOException {
-		super(new QBF_Inverse(filename), tenure, iterations
-		        ,INTERATIONS_TO_START_INTENSIFICATION, INTERATIONS_OF_INTENSIFICATION);
-		tlRemovedRandomItens = new ArrayDeque<>();
-		intensificationByRestartCounter = new HashMap<>();
-		fixedVariablesIntensification = new HashSet<>();
-	}
+    public TS_QBF(Integer tenure, int interationsToStartIntensification, int interationsOfIntensification,
+            int percentageFixedItems, Integer iterations, String filename) throws IOException {
+        super(new QBF_Inverse(filename), tenure, iterations, interationsToStartIntensification,
+                interationsOfIntensification);
+        tlRemovedRandomItens = new ArrayDeque<>();
+        intensificationByRestartCounter = new HashMap<>();
+        fixedVariablesIntensification = new HashSet<>();
+        this.percentageFixedItems = percentageFixedItems;
+    }
 
 	/* (non-Javadoc)
 	 * @see metaheuristics.tabusearch.AbstractTS#makeCL()
@@ -353,7 +356,7 @@ public class TS_QBF extends AbstractTS<Integer> {
 	}
 	
 	private int computeNumberFixedElements() {
-	    return (int) Math.round(intensificationByRestartCounter.size() * ((double)PERCENTAGE_FIXED_ITENS/100));
+	    return (int) Math.round(intensificationByRestartCounter.size() * ((double)this.percentageFixedItems/100));
 	}
 
 	private boolean evaluationAllowed(Integer candidate, OperationNeighborhood operation) {
@@ -435,14 +438,39 @@ public class TS_QBF extends AbstractTS<Integer> {
 	 */
 	public static void main(String[] args) throws IOException {
 
+	    /*System.out.println("Teste");
+	    
+	    for(int i = 0; i < args.length; i++) {
+	        System.out.println("Index: " + Integer.toString(i) + " Value: " + args[i]);
+	    }*/
 		long startTime = System.currentTimeMillis();
-		TS_QBF tabusearch = new TS_QBF(20, 200000, "instances/qbf100");
+		TabuSearchParameters parameters = buildParameters(args);
+		
+		TS_QBF tabusearch = new TS_QBF(parameters.getTenure(), parameters.getInterationsToStartIntensification(),
+		        parameters.getInterationsOfIntensification(), parameters.getPercentageFixeditems(), 500000, parameters.getInstanceName());
 		Solution<Integer> bestSol = tabusearch.solve();
-		System.out.println("maxVal = " + bestSol);
+		System.out.println("Best " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
-		System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
+		//System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
 
+	}
+	
+	private static TabuSearchParameters buildParameters(String[] args) {
+	    TabuSearchParameters parameters = new TabuSearchParameters();
+	    
+	    parameters.setInstanceName(args[1]);
+	    parameters.setTenure(Integer.parseInt(args[5]));
+	    parameters.setInterationsToStartIntensification(Integer.parseInt(args[7]));
+	    parameters.setInterationsOfIntensification(Integer.parseInt(args[9]));
+	    parameters.setPercentageFixeditems(Integer.parseInt(args[11]));
+	    
+	    /*parameters.setTenure(20);
+        parameters.setInterationsToStartIntensification(800);
+        parameters.setInterationsOfIntensification(400);
+        parameters.setPercentageFixeditems(20);*/
+	    
+	    return parameters;
 	}
 
 }

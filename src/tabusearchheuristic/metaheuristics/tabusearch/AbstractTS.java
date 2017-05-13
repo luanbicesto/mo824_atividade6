@@ -23,7 +23,7 @@ public abstract class AbstractTS<E> {
 	 * flag that indicates whether the code should print more information on
 	 * screen
 	 */
-	public static boolean verbose = true;
+	public static boolean verbose = false;
 
 	/**
 	 * a random number generator
@@ -91,6 +91,8 @@ public abstract class AbstractTS<E> {
 	private int countIterationsStartIntensification;
 	
 	private int countIterationsOfIntensification;
+	
+	private static final int TOTAL_EXECUTION_TIME = 120;
 
 	/**
 	 * Creates the Candidate List, which is an ArrayList of candidate elements
@@ -244,10 +246,17 @@ public abstract class AbstractTS<E> {
 	 */
 	public Solution<E> solve() {
 
+	    long startTime = System.nanoTime();
+	    int i = 0;
+	    
 		bestSol = createEmptySol();
 		constructiveHeuristic();
 		TL = makeTL();
-		for (int i = 0; i < iterations; i++) {
+		
+		while(calculateElapsedTimeSeconds(startTime) < TOTAL_EXECUTION_TIME
+		        && i < iterations) {
+		    i++;
+		//for (int i = 0; i < iterations; i++) {
 			neighborhoodMove();
 			if (bestSol.cost > incumbentSol.cost) {
 				bestSol = new Solution<E>(incumbentSol);
@@ -259,6 +268,10 @@ public abstract class AbstractTS<E> {
 		}
 
 		return bestSol;
+	}
+	
+	private long calculateElapsedTimeSeconds(long startTime) {
+	    return (System.nanoTime() - startTime) / 1000000000;
 	}
 	
 	private void applyIntensificationByRestart() {
