@@ -1,0 +1,11 @@
+## tamanho_pop valor calculado para a formula Nlog(l), onde se procura o valor otimo N
+## fitRate é a taxa de 
+## taxa_mut é a taxa de mutacao onde se procura o valor N para N/l 
+## sizeRate é a % de entradas iguais necessarias para fazer a troca
+# 1:            2:                   3: 4:                         5:
+construcao      ""		     c  ("padrao" ,"alternativa") 
+tamanho_pop     ""		     i  (3, 10)
+taxa_mut        ""        	     i  (1, 2)
+fitRate         ""         	     r  (0.9, 1.0)                 | construcao %in% c("alternativa")
+taxa_locus      ""        	     r  (0, 0.1)                   | construcao %in% c("alternativa")
+
