@@ -16,8 +16,10 @@ import grasp.solutions.Solution;
  *
  * @author ccavellucci, fusberti
  */
-public class GRASP_QBF extends AbstractGRASP<Integer> {
+public class GRASP_QBF_TTTPlot extends AbstractGRASP<Integer> {
 
+    private static final int TTTPlot_ITERATIONS = 200;
+    
     /**
      * Constructor for the GRASP_QBF class. An inverse QBF objective function is
      * passed as argument for the superclass constructor.
@@ -30,7 +32,7 @@ public class GRASP_QBF extends AbstractGRASP<Integer> {
      * parameters should be read.
      * @throws IOException necessary for I/O operations.
      */
-    public GRASP_QBF(Double alpha, Integer iterations, String filename) throws IOException {
+    public GRASP_QBF_TTTPlot(Double alpha, Integer iterations, String filename) throws IOException {
         super(new QBF_Inverse(filename), alpha, iterations);
     }
 
@@ -229,27 +231,33 @@ public class GRASP_QBF extends AbstractGRASP<Integer> {
      *
      */
     public static void main(String[] args) throws IOException {
+        isTTTPlotExecution = true;
+        GraspParametersTTTPlot parameters = buildParameters(args);
+        targetCost = parameters.getTargetCost();
         
-        long startTime = System.currentTimeMillis();
-        GraspParameters parameters = buildParameters(args);
-        
-        GRASP_QBF grasp = new GRASP_QBF(parameters.getAlpha(), 1000, parameters.getInstanceName());
-        Solution<Integer> bestSol = grasp.solve();
-        System.out.println("Best " + bestSol);
-        long endTime   = System.currentTimeMillis();
-        long totalTime = endTime - startTime;
-        //System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
- 
+        for(int i = 0; i < TTTPlot_ITERATIONS; i++) {
+            rng = new Random();
+            
+            long startTime = System.currentTimeMillis();
+            GRASP_QBF_TTTPlot grasp = new GRASP_QBF_TTTPlot(parameters.getAlpha(), 1000, parameters.getInstanceName());
+            grasp.solve();
+            //System.out.println("Best " + bestSol);
+            long endTime = System.currentTimeMillis();
+            long totalTime = endTime - startTime;
+            System.out.println((double)totalTime/(double)1000);
+        }
     }
     
-    private static GraspParameters buildParameters(String[] args) {
-        GraspParameters parameters = new GraspParameters();
-        parameters.setInstanceName(args[1]);
-        parameters.setAlpha(Double.parseDouble(args[5]));
+    private static GraspParametersTTTPlot buildParameters(String[] args) {
+        GraspParametersTTTPlot parameters = new GraspParametersTTTPlot();
+        parameters.setInstanceName(args[0]);
+        parameters.setAlpha(Double.parseDouble(args[1]));
+        parameters.setTargetCost(Double.parseDouble(args[2]));
         
-        /*parameters.setInstanceName("instances/qbf100");
-        parameters.setAlpha(0.05);*/
-      
+        /*parameters.setInstanceName("instances/qbf080");
+        parameters.setAlpha(0.05);
+        parameters.setTargetCost(-400.00);*/
+        
         return parameters;
     }
 

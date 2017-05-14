@@ -131,9 +131,9 @@ public class QBF implements Evaluator<Integer> {
 	 * solutions.Solution)
 	 */
 	@Override
-	public Double evaluateInsertionCost(Integer elem, Solution<Integer> sol) {
-
+	public Double evaluateInsertionCost(Integer elem, Solution<Integer> sol) {    
 		setVariables(sol);
+                                                
 		return evaluateInsertionQBF(elem);
 
 	}
@@ -148,11 +148,16 @@ public class QBF implements Evaluator<Integer> {
 	 *         insertion.
 	 */
 	public Double evaluateInsertionQBF(int i) {
-
-		if (variables[i] == 1)
+               	if (variables[i] == 1)
 			return 0.0;
-
-		return evaluateContributionQBF(i);
+                
+                Double out = 0.0;
+                                                
+                if(i - 1 >= 0 && variables[i - 1] != 0.0){variables[i - 1] = 0.0; out -= evaluateContributionQBF(i - 1);}
+                                
+                if(i + 1 < getDomainSize() && variables[i + 1] != 0.0){variables[i + 1] = 0.0; out -= evaluateContributionQBF(i + 1);}
+                                                
+		return out + evaluateContributionQBF(i);
 	}
 
 	/*
@@ -214,9 +219,8 @@ public class QBF implements Evaluator<Integer> {
 	 * @return The variation of the objective function resulting from the
 	 *         exchange.
 	 */
-	public Double evaluateExchangeQBF(int in, int out) {
-
-		Double sum = 0.0;
+	public Double evaluateExchangeQBF(int in, int out) {     
+                Double sum = 0.0;
 
 		if (in == out)
 			return 0.0;
@@ -334,7 +338,7 @@ public class QBF implements Evaluator<Integer> {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		QBF qbf = new QBF("matrix40");
+		QBF qbf = new QBF("qbf040");
 		qbf.printMatrix();
 		Double maxVal = Double.NEGATIVE_INFINITY;
 
