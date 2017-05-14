@@ -8,6 +8,7 @@ package ga.ga;
 import java.io.IOException;
 import ga.problems.qbf.solvers.GA_QBF;
 import ga.solutions.Solution;
+import tabusearchheuristic.problems.qbf.solvers.TabuSearchParametersTTTPlot;
 
 /**
  *

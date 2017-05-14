@@ -31,6 +31,10 @@ public abstract class AbstractGA<G extends Number, F> {
 	 * screen
 	 */
 	public static boolean verbose = true;
+	
+	public static boolean isTTTPlotExecution = false;
+    
+    public static Double targetCost = 0.0;
 
 	/**
 	 * a random number generator
@@ -184,33 +188,37 @@ public abstract class AbstractGA<G extends Number, F> {
 		 * enters the main loop and repeats until a given number of generations
 		 */
                 
-                long endTime = System.currentTimeMillis() + 120000;
+        long endTime = System.currentTimeMillis() + 120000;
                 
-		for (int g = 1; g <= generations && System.currentTimeMillis() < endTime; g++) {
-			Population parents = selectParents(population);
+        for (int g = 1; g <= generations && System.currentTimeMillis() < endTime; g++) {
+            Population parents = selectParents(population);
 
-			Population offsprings = Correct(crossover(parents));
+            Population offsprings = Correct(crossover(parents));
 
-			Population mutants = Correct(mutate(offsprings));
-			
-			Population newpopulation = selectPopulation(mutants);
-			
-                        if(contrucao.equals("padrao")){
-                            newpopulation = Correct(newpopulation);
-                        } else                        
-                            newpopulation = Correct(diversifyPopulation(newpopulation));
+            Population mutants = Correct(mutate(offsprings));
 
-			population = newpopulation;
+            Population newpopulation = selectPopulation(mutants);
 
-			bestChromosome = getBestChromosome(population);
+            if (contrucao.equals("padrao")) {
+                newpopulation = Correct(newpopulation);
+            } else
+                newpopulation = Correct(diversifyPopulation(newpopulation));
 
-			if (fitness(bestChromosome) > bestSol.cost) {
-				bestSol = decode(bestChromosome);
-				//if (verbose)
-					//System.out.println("(Gen. " + g + ") BestSol = " + bestSol);
-			}
+            population = newpopulation;
 
-		}
+            bestChromosome = getBestChromosome(population);
+
+            if (fitness(bestChromosome) > bestSol.cost) {
+                bestSol = decode(bestChromosome);
+                // if (verbose)
+                // System.out.println("(Gen. " + g + ") BestSol = " + bestSol);
+            }
+            
+            if(isTTTPlotExecution && targetCost <= bestSol.cost) {
+                return bestSol;
+            }
+
+        }
 
 		return bestSol;
 	}
