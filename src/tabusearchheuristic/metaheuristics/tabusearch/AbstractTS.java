@@ -24,6 +24,10 @@ public abstract class AbstractTS<E> {
 	 * screen
 	 */
 	public static boolean verbose = false;
+	
+	protected static boolean isTTTPlotExecution = false;
+    
+    protected static Double targetCost = 0.0;
 
 	/**
 	 * a random number generator
@@ -256,7 +260,6 @@ public abstract class AbstractTS<E> {
 		while(calculateElapsedTimeSeconds(startTime) < TOTAL_EXECUTION_TIME
 		        && i < iterations) {
 		    i++;
-		//for (int i = 0; i < iterations; i++) {
 			neighborhoodMove();
 			if (bestSol.cost > incumbentSol.cost) {
 				bestSol = new Solution<E>(incumbentSol);
@@ -264,6 +267,11 @@ public abstract class AbstractTS<E> {
 					System.out.println((statusIntensificationProcess == STATUS.ACTIVE ? "INTENSIFICATION - " : "") 
 				    + "(Iter. " + i + ") BestSol = " + bestSol);
 			}
+			
+			if(isTTTPlotExecution && targetCost >= bestSol.cost) {
+                return bestSol;
+            }
+			
 			applyIntensificationByRestart();
 		}
 

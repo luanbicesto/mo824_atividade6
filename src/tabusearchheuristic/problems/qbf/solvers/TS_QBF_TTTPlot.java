@@ -440,36 +440,41 @@ public class TS_QBF_TTTPlot extends AbstractTS<Integer> {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
+	    isTTTPlotExecution = true;
+	    TabuSearchParametersTTTPlot parameters = buildParameters(args);
+	    targetCost = parameters.getTargetValue();
+	    
 	    for(int i = 0; i < TTTPlot_ITERATIONS; i++) {
             rng = new Random();
+  
+            long startTime = System.currentTimeMillis();          
+            TS_QBF_TTTPlot tabusearch = new TS_QBF_TTTPlot(parameters.getTenure(), parameters.getInterationsToStartIntensification(),
+                    parameters.getInterationsOfIntensification(), parameters.getPercentageFixeditems(), 500000, parameters.getInstanceName());
+            tabusearch.solve();
+            //System.out.println("Best " + bestSol);
+            long endTime   = System.currentTimeMillis();
+            long totalTime = endTime - startTime;
+            System.out.println((double)totalTime/(double)1000);
 	    }
-		long startTime = System.currentTimeMillis();
-		TabuSearchParameters parameters = buildParameters(args);
-		
-		TS_QBF_TTTPlot tabusearch = new TS_QBF_TTTPlot(parameters.getTenure(), parameters.getInterationsToStartIntensification(),
-		        parameters.getInterationsOfIntensification(), parameters.getPercentageFixeditems(), 500000, parameters.getInstanceName());
-		Solution<Integer> bestSol = tabusearch.solve();
-		System.out.println("Best " + bestSol);
-		long endTime   = System.currentTimeMillis();
-		long totalTime = endTime - startTime;
-		System.out.println((double)totalTime/(double)1000);
-
 	}
 	
-	private static TabuSearchParameters buildParameters(String[] args) {
-	    TabuSearchParameters parameters = new TabuSearchParameters();
+	private static TabuSearchParametersTTTPlot buildParameters(String[] args) {
+	    TabuSearchParametersTTTPlot parameters = new TabuSearchParametersTTTPlot();
 	    
-	    parameters.setInstanceName(args[1]);
-	    parameters.setTenure(Integer.parseInt(args[5]));
-	    parameters.setInterationsToStartIntensification(Integer.parseInt(args[7]));
-	    parameters.setInterationsOfIntensification(Integer.parseInt(args[9]));
-	    parameters.setPercentageFixeditems(Integer.parseInt(args[11]));
+	    parameters.setInstanceName(args[0]);
+	    parameters.setTenure(Integer.parseInt(args[1]));
+	    parameters.setInterationsToStartIntensification(Integer.parseInt(args[2]));
+	    parameters.setInterationsOfIntensification(Integer.parseInt(args[3]));
+	    parameters.setPercentageFixeditems(Integer.parseInt(args[4]));
+	    parameters.setTargetValue(Double.parseDouble(args[5]));
 	    
 	    /*parameters.setTenure(20);
+	    parameters.setInstanceName("instances/qbf060");
         parameters.setInterationsToStartIntensification(800);
         parameters.setInterationsOfIntensification(400);
-        parameters.setPercentageFixeditems(20);*/
-	    
+        parameters.setPercentageFixeditems(20);
+        parameters.setTargetValue(-300.00);*/
+        
 	    return parameters;
 	}
 
