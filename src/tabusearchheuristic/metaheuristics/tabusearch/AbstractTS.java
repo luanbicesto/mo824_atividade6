@@ -23,7 +23,7 @@ public abstract class AbstractTS<E> {
 	 * flag that indicates whether the code should print more information on
 	 * screen
 	 */
-	public static boolean verbose = false;
+	public static boolean verbose = true;
 	
 	protected static boolean isTTTPlotExecution = false;
     
@@ -96,7 +96,7 @@ public abstract class AbstractTS<E> {
 	
 	private int countIterationsOfIntensification;
 	
-	private static final int TOTAL_EXECUTION_TIME = 120;
+	private static final int TOTAL_EXECUTION_TIME = 180;
 
 	/**
 	 * Creates the Candidate List, which is an ArrayList of candidate elements

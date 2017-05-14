@@ -18,7 +18,7 @@ import grasp.solutions.Solution;
  */
 public class GRASP_QBF_TTTPlot extends AbstractGRASP<Integer> {
 
-    private static final int TTTPlot_ITERATIONS = 200;
+    private static final int TTTPlot_ITERATIONS = 1;
     
     /**
      * Constructor for the GRASP_QBF class. An inverse QBF objective function is

@@ -244,11 +244,11 @@ public class GRASP_QBF extends AbstractGRASP<Integer> {
     
     private static GraspParameters buildParameters(String[] args) {
         GraspParameters parameters = new GraspParameters();
-        parameters.setInstanceName(args[1]);
-        parameters.setAlpha(Double.parseDouble(args[5]));
+        /*parameters.setInstanceName(args[1]);
+        parameters.setAlpha(Double.parseDouble(args[5]));*/
         
-        /*parameters.setInstanceName("instances/qbf100");
-        parameters.setAlpha(0.05);*/
+        parameters.setInstanceName("instances/qbf200");
+        parameters.setAlpha(0.05);
       
         return parameters;
     }

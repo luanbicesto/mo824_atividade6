@@ -1,0 +1,27 @@
+Tabu
+# Best configurations as commandlines (first number is the configuration ID)
+39  --tenure 17 --interationsToStartIntensification 811 --interationsOfIntensification 368 --percentageFixeditems 34
+31  --tenure 36 --interationsToStartIntensification 848 --interationsOfIntensification 479 --percentageFixeditems 21
+1   --tenure 12 --interationsToStartIntensification 1142 --interationsOfIntensification 560 --percentageFixeditems 34
+28  --tenure 19 --interationsToStartIntensification 821 --interationsOfIntensification 341 --percentageFixeditems 32
+
+
+Genetic
+# Best configurations (first number is the configuration ID)
+    construcao tamanho_pop taxa_mut fitRate taxa_locus
+17 alternativa           3        2    0.98       0.09
+20 alternativa           3        2    0.99       0.05
+23 alternativa           3        2    0.92       0.08
+40 alternativa           3        2    0.91       0.07
+# Best configurations as commandlines (first number is the configuration ID)
+17  alternativa 3 2 0.98 0.09
+20  alternativa 3 2 0.99 0.05
+23  alternativa 3 2 0.92 0.08
+40  alternativa 3 2 0.91 0.07
+
+GRASP
+# Best configurations as commandlines (first number is the configuration ID)
+29  --alpha 0.07
+45  --alpha 0.07
+
+

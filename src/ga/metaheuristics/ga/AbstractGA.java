@@ -77,7 +77,7 @@ public abstract class AbstractGA<G extends Number, F> {
 	//sizeRate - % máxima de diferença entre os membros da população
 	public double sizeRate = 0.005;
         
-        public String contrucao = "padrao";
+    public String contrucao = "padrao";
 
 	/**
 	 * the best solution

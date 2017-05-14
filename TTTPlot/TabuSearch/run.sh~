@@ -2,8 +2,8 @@
 STDOUT=output
 STDERR=errors
 EXE='java -cp /home/luanb/Luan/Unicamp/11_Semestre/MO824/trabalho/workspace/Atividade6/TTTPlot/TabuSearch/bin/ts.jar tabusearchheuristic.problems.qbf.solvers.TS_QBF_TTTPlot'
-INSTANCE='/home/luanb/Luan/Unicamp/11_Semestre/MO824/trabalho/workspace/Atividade6/TTTPlot/TabuSearch/instances/qbf100'
-TARGET_COST=-800
+INSTANCE='/home/luanb/Luan/Unicamp/11_Semestre/MO824/trabalho/workspace/Atividade6/TTTPlot/TabuSearch/instances/qbf060'
+TARGET_COST=-380
 TENURE=20
 ITERATION_TO_START_INTENSIFICATION=800
 ITERATIONS_OF_INTENSIFICATION=400

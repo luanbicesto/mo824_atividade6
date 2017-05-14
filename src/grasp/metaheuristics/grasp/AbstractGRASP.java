@@ -248,7 +248,7 @@ public abstract class AbstractGRASP<E> {
      * @return The best feasible solution obtained throughout all iterations.
      */
     public Solution<E> solve() {
-        long end = System.currentTimeMillis()+ 120000;
+        long end = System.currentTimeMillis()+ 180000;
 
         bestSol = createEmptySol();
         partialSol = createEmptySol();

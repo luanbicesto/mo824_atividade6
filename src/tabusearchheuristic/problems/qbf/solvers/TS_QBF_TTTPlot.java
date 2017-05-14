@@ -32,7 +32,7 @@ public class TS_QBF_TTTPlot extends AbstractTS<Integer> {
 	
 	private final Integer fake = new Integer(-1);
 	
-	private static final int TTTPlot_ITERATIONS = 200;
+	private static final int TTTPlot_ITERATIONS = 1;
 	
 	//private static final int INTERATIONS_TO_START_INTENSIFICATION = 800;
 	

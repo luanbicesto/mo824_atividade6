@@ -437,12 +437,6 @@ public class TS_QBF extends AbstractTS<Integer> {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException {
-
-	    /*System.out.println("Teste");
-	    
-	    for(int i = 0; i < args.length; i++) {
-	        System.out.println("Index: " + Integer.toString(i) + " Value: " + args[i]);
-	    }*/
 		long startTime = System.currentTimeMillis();
 		TabuSearchParameters parameters = buildParameters(args);
 		
@@ -452,23 +446,23 @@ public class TS_QBF extends AbstractTS<Integer> {
 		System.out.println("Best " + bestSol);
 		long endTime   = System.currentTimeMillis();
 		long totalTime = endTime - startTime;
-		//System.out.println("Time = "+(double)totalTime/(double)1000+" seg");
 
 	}
 	
 	private static TabuSearchParameters buildParameters(String[] args) {
 	    TabuSearchParameters parameters = new TabuSearchParameters();
 	    
-	    parameters.setInstanceName(args[1]);
+	    /*parameters.setInstanceName(args[1]);
 	    parameters.setTenure(Integer.parseInt(args[5]));
 	    parameters.setInterationsToStartIntensification(Integer.parseInt(args[7]));
 	    parameters.setInterationsOfIntensification(Integer.parseInt(args[9]));
-	    parameters.setPercentageFixeditems(Integer.parseInt(args[11]));
+	    parameters.setPercentageFixeditems(Integer.parseInt(args[11]));*/
 	    
-	    /*parameters.setTenure(20);
+	    parameters.setInstanceName("instances/qbf200");
+	    parameters.setTenure(20);
         parameters.setInterationsToStartIntensification(800);
         parameters.setInterationsOfIntensification(400);
-        parameters.setPercentageFixeditems(20);*/
+        parameters.setPercentageFixeditems(20);
 	    
 	    return parameters;
 	}
